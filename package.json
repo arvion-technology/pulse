@@ -1,0 +1,19 @@
+{
+  "name": "pulse",
+  "version": "1.0.0",
+  "description": "Privacy-first product analytics you can self-host. Event ingestion, funnels, retention curves, cohorts and live dashboards in a single dependency-free app.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "author": "Arvion Technologies <hello@arviontech.net> (https://arviontech.net)",
+  "homepage": "https://arvion-technology.github.io/labs/demos/pulse/",
+  "repository": { "type": "git", "url": "git+https://github.com/arvion-technology/pulse.git" },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node scripts/serve.mjs . 4173",
+    "shot": "node scripts/shot.mjs 1440 900 docs/screenshot.png",
+    "shot:2": "node scripts/shot.mjs 1440 900 docs/screenshot-2.png #funnels",
+    "verify": "node --test test/ && node scripts/serve-check.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
