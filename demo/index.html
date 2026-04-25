@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Pulse — product analytics you can self-host</title>
+  <meta name="description" content="Privacy-first product analytics: funnels, retention, cohorts and live events in one dependency-free app." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0f1a'/><text x='16' y='22' font-family='sans-serif' font-size='16' font-weight='700' fill='%23f5c26b' text-anchor='middle'>A</text></svg>" />
+  <link rel="stylesheet" href="arvion.css" />
+</head>
+<body>
+  <div class="aurora"></div>
+  <div class="grid-lines"></div>
+
+  <div class="app shell">
+    <!-- ---------------------------------------------------------------- -->
+    <aside class="sidebar">
+      <a class="brand" href="./index.html" style="padding:6px 8px 14px">
+        <span class="brand-mark">A</span>
+        <span>
+          <span class="brand-word">PULSE</span>
+          <span class="brand-sub" style="display:block">by Arvion</span>
+        </span>
+      </a>
+
+      <div class="nav-label">Analyze</div>
+      <a class="nav-item active" href="#overview" data-view="overview"><span class="nav-dot"></span>Overview</a>
+      <a class="nav-item" href="#funnels" data-view="funnels"><span class="nav-dot"></span>Funnels</a>
+      <a class="nav-item" href="#retention" data-view="retention"><span class="nav-dot"></span>Retention</a>
+      <a class="nav-item" href="#events" data-view="events"><span class="nav-dot"></span>Event explorer</a>
+      <a class="nav-item" href="#live" data-view="live"><span class="nav-dot"></span><span>Live stream</span><span class="badge gold" style="margin-left:auto;padding:1px 7px">new</span></a>
+
+      <div class="nav-label">Workspace</div>
+      <a class="nav-item" href="https://github.com/arvion-technology/pulse#readme" target="_blank" rel="noopener"><span class="nav-dot"></span>Documentation ↗</a>
+      <a class="nav-item" href="#settings"><span class="nav-dot"></span>Settings</a>
+
+      <div style="flex:1"></div>
+      <div class="card flat pad-sm" style="margin-top:14px">
+        <div class="row" style="gap:8px">
+          <span class="badge green"><span class="dot pulse"></span>healthy</span>
+          <span class="spacer"></span>
+          <span class="small muted mono">v1.4.2</span>
+        </div>
+        <p class="small muted" style="margin:8px 0 0">1.2M events ingested<br />0 PII fields collected</p>
+      </div>
+    </aside>
+
+    <!-- ---------------------------------------------------------------- -->
+    <div style="min-width:0">
+      <header class="topbar">
+        <div class="search" style="width:min(360px,40vw)">
+          <input class="input" id="global-search" placeholder="Search events, users, cohorts…" aria-label="Search" />
+        </div>
+        <span class="spacer"></span>
+        <span class="badge" id="live-clock"><span class="dot pulse" style="color:var(--green)"></span><span class="mono">--:--:--</span></span>
+        <div class="tabs" id="range-tabs" role="tablist" aria-label="Date range">
+          <button class="tab" data-range="7" role="tab">7d</button>
+          <button class="tab active" data-range="30" role="tab">30d</button>
+          <button class="tab" data-range="90" role="tab">90d</button>
+        </div>
+        <div class="avatar" title="Demo workspace">AV</div>
+      </header>
+
+      <main class="main">
+        <!-- ============================================================ -->
+        <section data-view-panel="overview">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Product analytics</div>
+              <h1>Overview</h1>
+              <p class="lede">A live read on acquisition, activation and retention — computed in your browser from a seeded 120k-event dataset.</p>
+            </div>
+            <span class="spacer"></span>
+            <div class="row">
+              <button class="btn sm" id="export-overview">Export CSV</button>
+              <button class="btn primary sm" id="refresh">Refresh</button>
+            </div>
+          </div>
+
+          <div class="grid grid-4" id="kpis" style="margin-bottom:16px"></div>
+
+          <div class="grid" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr);margin-bottom:16px">
+            <div class="card">
+              <div class="card-head">
+                <div>
+                  <div class="card-title">Active users</div>
+                  <div class="card-sub">Daily active users vs. sessions</div>
+                </div>
+                <span class="spacer"></span>
+                <div class="legend"><span><i style="background:var(--gold)"></i>DAU</span><span><i style="background:var(--blue)"></i>Sessions</span></div>
+              </div>
+              <div id="chart-users"></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><div class="card-title">Devices</div></div>
+              <div class="row" style="justify-content:center;gap:22px">
+                <div id="donut-devices"></div>
+                <div class="col" id="device-legend" style="gap:10px;font-size:12.5px"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,2fr)">
+            <div class="card">
+              <div class="card-head"><div class="card-title">Top pages</div><span class="spacer"></span><span class="badge">by views</span></div>
+              <div id="top-pages"></div>
+            </div>
+            <div class="card">
+              <div class="card-head">
+                <div class="card-title">Recent events</div>
+                <span class="spacer"></span>
+                <span class="badge green"><span class="dot pulse"></span>streaming</span>
+              </div>
+              <div id="recent-events"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section data-view-panel="funnels" hidden>
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Activation</div>
+              <h1>Funnel builder</h1>
+              <p class="lede">Add up to six ordered steps. Pulse walks each user's timeline in order, so re-entering a step never inflates conversion.</p>
+            </div>
+          </div>
+          <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)">
+            <div class="card">
+              <div class="card-head"><div class="card-title">Steps</div><span class="spacer"></span><span class="badge gold" id="funnel-count">4 steps</span></div>
+              <div class="col" id="funnel-steps"></div>
+              <button class="btn sm mt-2" id="add-step">+ Add step</button>
+            </div>
+            <div class="col" style="gap:16px">
+              <div class="card">
+                <div class="card-head">
+                  <div><div class="card-title">Conversion</div><div class="card-sub" id="funnel-window"></div></div>
+                  <span class="spacer"></span>
+                  <div style="text-align:right">
+                    <div class="stat-label">end-to-end</div>
+                    <div class="stat-value gold" id="funnel-total">–</div>
+                  </div>
+                </div>
+                <div id="funnel-bars" class="col" style="gap:14px"></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><div class="card-title">Stalled users</div><span class="spacer"></span><span class="small muted">dropped at each step, by device</span></div>
+                <div id="funnel-breakdown"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section data-view-panel="retention" hidden>
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Retention</div>
+              <h1>Weekly cohorts</h1>
+              <p class="lede">Signups grouped by week, tracked for eight weeks. A user counts as retained in week N if they came back at least once.</p>
+            </div>
+          </div>
+          <div class="grid" style="grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)">
+            <div class="card">
+              <div class="card-head"><div class="card-title">Cohort heatmap</div><span class="spacer"></span><span class="small muted">% of cohort active</span></div>
+              <div id="cohort-table"></div>
+            </div>
+            <div class="col" style="gap:16px">
+              <div class="card">
+                <div class="card-head"><div class="card-title">Average retention</div></div>
+                <div id="retention-curve"></div>
+              </div>
+              <div class="card">
+                <div class="card-head"><div class="card-title">Retention drivers</div></div>
+                <div id="retention-drivers"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section data-view-panel="events" hidden>
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Raw data</div>
+              <h1>Event explorer</h1>
+              <p class="lede">Every event is a plain JSON object: name, timestamp, anonymous user id and non-PII properties.</p>
+            </div>
+            <span class="spacer"></span>
+            <span class="badge mono" id="event-total">–</span>
+          </div>
+          <div class="card" style="margin-bottom:16px">
+            <div class="row wrap">
+              <div class="search" style="flex:1;min-width:200px"><input class="input" id="event-search" placeholder="Filter by name, user or page…" /></div>
+              <select class="select" id="event-name" style="width:170px" aria-label="Event name"></select>
+              <select class="select" id="event-country" style="width:160px" aria-label="Country"></select>
+              <select class="select" id="event-device" style="width:140px" aria-label="Device"></select>
+              <button class="btn sm" id="event-clear">Clear</button>
+            </div>
+          </div>
+          <div class="card pad-sm" style="padding:0">
+            <div id="event-table"></div>
+            <div class="row" style="padding:12px 14px;border-top:1px solid var(--line)">
+              <span class="small muted" id="event-page-info">–</span>
+              <span class="spacer"></span>
+              <button class="btn sm" id="event-prev">← Prev</button>
+              <button class="btn sm" id="event-next">Next →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section data-view-panel="live" hidden>
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Streaming</div>
+              <h1>Live stream</h1>
+              <p class="lede">Events as they arrive. This demo replays the seeded dataset in real time — pause it, or open the inspector.</p>
+            </div>
+            <span class="spacer"></span>
+            <button class="btn sm" id="live-toggle">Pause</button>
+          </div>
+          <div class="grid grid-3" id="live-kpis" style="margin-bottom:16px"></div>
+          <div class="card pad-sm" style="padding:0">
+            <div id="live-tape" style="max-height:520px;overflow:auto"></div>
+          </div>
+        </section>
+
+        <section data-view-panel="settings" hidden>
+          <div class="page-head">
+            <div><div class="eyebrow">Workspace</div><h1>Settings</h1>
+            <p class="lede">Everything in this demo is computed locally. No requests leave your browser.</p></div>
+          </div>
+          <div class="grid grid-2">
+            <div class="card"><div class="card-head"><div class="card-title">Privacy</div></div>
+              <p class="small">Pulse stores anonymous ids only — no emails, no IP addresses, no cookies. Property values are truncated to 64 characters before storage.</p>
+              <div class="divider"></div>
+              <div class="row"><span>Collect page titles</span><span class="spacer"></span><span class="switch" role="switch" aria-checked="true"></span></div>
+              <div class="row mt-1"><span>Capture referrers</span><span class="spacer"></span><span class="switch" role="switch" aria-checked="false"></span></div>
+            </div>
+            <div class="card"><div class="card-head"><div class="card-title">Data</div></div>
+              <dl class="kv">
+                <dt>Dataset</dt><dd>seeded · 90 days</dd>
+                <dt>Events</dt><dd class="mono" id="dataset-events">—</dd>
+                <dt>Users</dt><dd class="mono" id="dataset-users">—</dd>
+                <dt>Seed</dt><dd class="mono">20261028</dd>
+                <dt>Storage</dt><dd>browser memory</dd>
+              </dl>
+              <div class="divider"></div>
+              <button class="btn sm danger" id="reset-data">Regenerate dataset</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="demo-banner">
+    <span class="brand-mark" style="width:20px;height:20px;font-size:10px;border-radius:6px">A</span>
+    <span>Arvion Labs</span>
+    <span class="sep"></span>
+    <a href="https://arvion-technology.github.io/labs/">All projects</a>
+    <span class="sep"></span>
+    <a href="https://github.com/arvion-technology/pulse" target="_blank" rel="noopener">source</a>
+  </div>
+
+  <script src="arvion.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
