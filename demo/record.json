@@ -1,0 +1,77 @@
+[
+  {
+    "wait": 900
+  },
+  {
+    "hash": "#overview"
+  },
+  {
+    "wait": 1000
+  },
+  {
+    "scroll": 320
+  },
+  {
+    "wait": 650
+  },
+  {
+    "scroll": -180
+  },
+  {
+    "wait": 450
+  },
+  {
+    "hash": "#funnels"
+  },
+  {
+    "wait": 1000
+  },
+  {
+    "scroll": 320
+  },
+  {
+    "wait": 650
+  },
+  {
+    "scroll": -180
+  },
+  {
+    "wait": 450
+  },
+  {
+    "hash": "#retention"
+  },
+  {
+    "wait": 1000
+  },
+  {
+    "scroll": 320
+  },
+  {
+    "wait": 650
+  },
+  {
+    "scroll": -180
+  },
+  {
+    "wait": 450
+  },
+  {
+    "hash": "#events"
+  },
+  {
+    "wait": 1000
+  },
+  {
+    "scroll": 320
+  },
+  {
+    "wait": 650
+  },
+  {
+    "scroll": -180
+  },
+  {
+    "wait": 450
+  }
+]
