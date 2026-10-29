@@ -1,4 +1,4 @@
-// Pulse — demo application.
+// Pulse, demo application.
 // All analytics come from ../src/analytics.js and the dataset from
 // ../src/dataset.js; this file only handles rendering and interaction.
 import {
@@ -37,7 +37,7 @@ function previousEvents(days = state.range) {
 }
 
 /**
- * Week-1 retention split by plan and device — the "what correlates with
+ * Week-1 retention split by plan and device, the "what correlates with
  * coming back" panel. Only includes cohorts old enough to observe week 1.
  */
 function retentionDrivers() {
@@ -216,13 +216,13 @@ function renderFunnels() {
       { label: "Stalled", align: "right", render: (r) => el("span", { class: "strong", text: fmt.num(r.users) }) },
       {
         label: "Mostly", align: "right", render: (r) => {
-          const [device, count] = Object.entries(r.breakdown).sort((a, b) => b[1] - a[1])[0] || ["—", 0];
+          const [device, count] = Object.entries(r.breakdown).sort((a, b) => b[1] - a[1])[0] || [", ", 0];
           return el("span", { class: "small muted", text: `${fmt.title(device)} · ${fmt.pct(count / Math.max(1, r.users), 0)}` });
         },
       },
     ],
     rows: analysis.drops,
-    empty: "Everyone converted — try narrower steps.",
+    empty: "Everyone converted, try narrower steps.",
   }));
 }
 
@@ -305,7 +305,7 @@ function renderEvents() {
       { label: "Timestamp", width: "160px", render: (r) => el("span", { class: "mono small", text: new Date(r.ts).toISOString().replace("T", " ").slice(0, 19) }) },
       { label: "Event", render: (r) => eventBadge(r.name) },
       { label: "User", render: (r) => el("span", { class: "mono small", text: r.user }) },
-      { label: "Page", render: (r) => el("span", { class: "small muted", text: r.page || "—" }) },
+      { label: "Page", render: (r) => el("span", { class: "small muted", text: r.page || ", " }) },
       { label: "Country", render: (r) => el("span", { class: "small muted", text: r.country }) },
       { label: "Device", align: "right", render: (r) => el("span", { class: "badge", text: r.device }) },
     ],
@@ -330,7 +330,7 @@ function renderLive() {
   const top = topN(pool, "name", 1)[0];
   const kpis = [
     ["Events / min", fmt.num(84 + Math.round(Math.random() * 24)), "streaming now"],
-    ["Top event", top ? top.value.replace(/_/g, " ") : "—", "last 2k events"],
+    ["Top event", top ? top.value.replace(/_/g, " ") : ", ", "last 2k events"],
     ["Active sessions", fmt.num(Math.round(activeUsers * 0.42)), "right now"],
   ].map(([label, value, sub]) => el("div", { class: "card" },
     el("div", { class: "stat" },
@@ -349,7 +349,7 @@ function renderLive() {
       eventBadge(e.name),
       el("span", { class: "mono small", text: e.user }),
       el("span", { class: "spacer" }),
-      el("span", { class: "small muted", text: `${e.country} · ${e.device} · ${e.page || "—"}` })));
+      el("span", { class: "small muted", text: `${e.country} · ${e.device} · ${e.page || ", "}` })));
     while (tape.childElementCount > 40) tape.lastElementChild.remove();
   };
   for (let i = 0; i < 12; i++) push();

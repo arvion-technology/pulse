@@ -2,12 +2,12 @@
 <img src="docs/demo.gif" alt="Pulse overview dashboard" width="100%" />
 </div>
 
-<sub>Recorded from the live demo — <a href="docs/demo.mp4">MP4</a> · <a href="docs/screenshot.png">static frame</a></sub>
+<sub>Recorded from the live demo, <a href="docs/demo.mp4">MP4</a> · <a href="docs/screenshot.png">static frame</a></sub>
 
 # Pulse
 
 Product analytics in the browser: funnels, retention cohorts, breakdowns and a
-live event stream. No tracking script, no database, no build step — one static
+live event stream. No tracking script, no database, no build step, one static
 page and a small framework-free library.
 
 [**Open the live demo**](https://arvion-technology.github.io/labs/demos/pulse/demo/) · [CI](https://github.com/arvion-technology/pulse/actions/workflows/ci.yml) · [MIT](LICENSE)
@@ -16,8 +16,8 @@ page and a small framework-free library.
 
 Most product-analytics tools are a hosted service with a tracking snippet, a
 per-event bill and a data model you cannot inspect. Pulse is the opposite: the
-whole pipeline — event generation, ingestion shape, funnel logic, retention
-cohorts, charts — runs in the page. It is small enough to read in an afternoon
+whole pipeline, event generation, ingestion shape, funnel logic, retention
+cohorts, charts, runs in the page. It is small enough to read in an afternoon
 and generic enough to be a starting point for a self-hosted analytics feature.
 
 The demo ships a seeded dataset of **120,000 events across 4,000 anonymous users
@@ -26,16 +26,16 @@ rather than hard-coded.
 
 ## What it does
 
-- **Overview** — active users, sessions, signups and end-to-end conversion, each
+- **Overview**: active users, sessions, signups and end-to-end conversion, each
   with a seven-day trend and a period-over-period delta; daily DAU/session chart,
   device split, top pages, recent events.
-- **Funnel builder** — order two to six steps and see entry, step-to-step
+- **Funnel builder**: order two to six steps and see entry, step-to-step
   conversion, drop-off counts and which device stalls at each transition.
-- **Retention** — eight weekly cohorts by signup week, an eight-week heatmap,
+- **Retention**: eight weekly cohorts by signup week, an eight-week heatmap,
   the average retention curve, and week-one retention split by plan and device.
-- **Event explorer** — filter by event name, country, device or free text; paginate
+- **Event explorer**: filter by event name, country, device or free text; paginate
   the log; open any event in an inspector.
-- **Live stream** — events replayed at human speed, with pause and resume.
+- **Live stream**: events replayed at human speed, with pause and resume.
 
 Every view can be deep-linked (`#funnels`, `#retention`, `#events`, `#live`), which
 is also how the screenshots are captured.
@@ -137,7 +137,7 @@ the window, repeated events and the `now` cutoff.
 **Retention is week-bucketed from first seen.** Cohort `C` is the set of users
 whose first event falls in the week `C` weeks before the current week. A user is
 retained in week `W` if any event falls in `[first + 7W, first + 7(W+1))`. Cells
-that cannot be observed yet are `null`, not zero — showing an unobservable week as
+that cannot be observed yet are `null`, not zero, showing an unobservable week as
 0% retention is the most common way retention dashboards lie.
 
 **Deltas compare equal adjacent windows,** not "this month vs last month", so a
@@ -172,7 +172,7 @@ node scripts/serve-check.mjs
 ## What this is not
 
 Pulse is a reference implementation, not a product. It has no ingestion endpoint,
-no authentication, no multi-tenancy and no durable storage — the dataset lives in
+no authentication, no multi-tenancy and no durable storage, the dataset lives in
 memory and is regenerated on reload. A production version would put the ingestion
 API and storage behind the same event model, and replace the in-browser
 aggregation with SQL or a columnar store. The funnel and retention semantics are
@@ -210,7 +210,7 @@ The live copy is served from the Arvion Labs gallery on GitHub Pages.
 
 Built by [Arvion Technologies](https://arviontech.net) in Kathmandu as part of our
 open-source [Labs](https://github.com/arvion-technology/labs) series. We build
-web platforms, mobile apps and cloud systems for clients — if you need analytics
+web platforms, mobile apps and cloud systems for clients, if you need analytics
 inside your own product, the demos are a fair sample of how we work.
 
 MIT licensed.

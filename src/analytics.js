@@ -1,5 +1,5 @@
 /**
- * Pulse analytics core — framework-free, dependency-free, pure functions.
+ * Pulse analytics core, framework-free, dependency-free, pure functions.
  *
  * Events are plain objects:
  *   { id, name, ts, user, session, country, device, plan, page }

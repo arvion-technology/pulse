@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>Pulse — product analytics you can self-host</title>
+  <title>Pulse | product analytics you can self-host</title>
   <meta name="description" content="Privacy-first product analytics: funnels, retention, cohorts and live events in one dependency-free app." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 9 L91 91 H73 L50 52 L27 91 H9 Z' fill='%23f5c26b'/><circle cx='50' cy='31' r='6.6' fill='%230b0f1a'/><path d='M50 52 L67 90 H33 Z' fill='%230b0f1a'/></svg>" />
   <link rel="stylesheet" href="arvion.css" />
@@ -69,7 +69,7 @@
             <div>
               <div class="eyebrow">Product analytics</div>
               <h1>Overview</h1>
-              <p class="lede">A live read on acquisition, activation and retention — computed in your browser from a seeded 120k-event dataset.</p>
+              <p class="lede">A live read on acquisition, activation and retention, computed in your browser from a seeded 120k-event dataset.</p>
             </div>
             <span class="spacer"></span>
             <div class="row">
@@ -139,7 +139,7 @@
                   <span class="spacer"></span>
                   <div style="text-align:right">
                     <div class="stat-label">end-to-end</div>
-                    <div class="stat-value gold" id="funnel-total">–</div>
+                    <div class="stat-value gold" id="funnel-total">, </div>
                   </div>
                 </div>
                 <div id="funnel-bars" class="col" style="gap:14px"></div>
@@ -188,7 +188,7 @@
               <p class="lede">Every event is a plain JSON object: name, timestamp, anonymous user id and non-PII properties.</p>
             </div>
             <span class="spacer"></span>
-            <span class="badge mono" id="event-total">–</span>
+            <span class="badge mono" id="event-total">, </span>
           </div>
           <div class="card" style="margin-bottom:16px">
             <div class="row wrap">
@@ -202,7 +202,7 @@
           <div class="card pad-sm" style="padding:0">
             <div id="event-table"></div>
             <div class="row" style="padding:12px 14px;border-top:1px solid var(--line)">
-              <span class="small muted" id="event-page-info">–</span>
+              <span class="small muted" id="event-page-info">, </span>
               <span class="spacer"></span>
               <button class="btn sm" id="event-prev">← Prev</button>
               <button class="btn sm" id="event-next">Next →</button>
@@ -216,7 +216,7 @@
             <div>
               <div class="eyebrow">Streaming</div>
               <h1>Live stream</h1>
-              <p class="lede">Events as they arrive. This demo replays the seeded dataset in real time — pause it, or open the inspector.</p>
+              <p class="lede">Events as they arrive. This demo replays the seeded dataset in real time, pause it, or open the inspector.</p>
             </div>
             <span class="spacer"></span>
             <button class="btn sm" id="live-toggle">Pause</button>
@@ -234,7 +234,7 @@
           </div>
           <div class="grid grid-2">
             <div class="card"><div class="card-head"><div class="card-title">Privacy</div></div>
-              <p class="small">Pulse stores anonymous ids only — no emails, no IP addresses, no cookies. Property values are truncated to 64 characters before storage.</p>
+              <p class="small">Pulse stores anonymous ids only, no emails, no IP addresses, no cookies. Property values are truncated to 64 characters before storage.</p>
               <div class="divider"></div>
               <div class="row"><span>Collect page titles</span><span class="spacer"></span><span class="switch" role="switch" aria-checked="true"></span></div>
               <div class="row mt-1"><span>Capture referrers</span><span class="spacer"></span><span class="switch" role="switch" aria-checked="false"></span></div>
@@ -242,8 +242,8 @@
             <div class="card"><div class="card-head"><div class="card-title">Data</div></div>
               <dl class="kv">
                 <dt>Dataset</dt><dd>seeded · 90 days</dd>
-                <dt>Events</dt><dd class="mono" id="dataset-events">—</dd>
-                <dt>Users</dt><dd class="mono" id="dataset-users">—</dd>
+                <dt>Events</dt><dd class="mono" id="dataset-events">, </dd>
+                <dt>Users</dt><dd class="mono" id="dataset-users">, </dd>
                 <dt>Seed</dt><dd class="mono">20261028</dd>
                 <dt>Storage</dt><dd>browser memory</dd>
               </dl>
